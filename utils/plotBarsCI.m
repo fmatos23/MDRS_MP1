@@ -9,7 +9,7 @@ function plotBarsCI(m, ci, xLabels, yLabel, titulo, legenda, ficheiro)
 %     ficheiro - (opcional) caminho para guardar em .png
 
     if isvector(m), m = m(:); ci = ci(:); end
-    figure;
+    figure('Renderer', 'painters');   % painters evita problemas de OpenGL
     b = bar(m); hold on; grid on;
 
     % centro de cada barra para pôr as error bars no sítio certo
