@@ -24,6 +24,9 @@ for k = 1:nC
             APD3(k), APD3ci(k), MPD3(k), MPD3ci(k));
 end
 
+% guardado para comparar com a prioridade na 2.d
+save(fullfile('results', 'task1d.mat'), 'APD3', 'APD3ci', 'MPD3', 'MPD3ci');
+
 plotBarsCI([APD3' MPD3'], [APD3ci' MPD3ci'], p.cases(casos), 'Delay (ms)', ...
            'Task 1.d - Packet delay of Flow 3 (FIFO)', ...
            {'Average delay', 'Maximum delay'}, ...

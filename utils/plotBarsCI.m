@@ -22,7 +22,8 @@ function plotBarsCI(m, ci, xLabels, yLabel, titulo, legenda, ficheiro)
     set(gca, 'XTick', 1:size(m,1), 'XTickLabel', xLabels);
     ylabel(yLabel); title(titulo);
     if nargin >= 6 && ~isempty(legenda)
-        legend(legenda, 'Location', 'northwest');
+        % legenda por cima do gráfico, para não tapar as barras
+        legend(legenda, 'Location', 'northoutside', 'Orientation', 'horizontal');
     end
     hold off;
 
