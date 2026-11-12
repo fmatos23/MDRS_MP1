@@ -6,7 +6,7 @@ Avaliação de desempenho de uma ligação ponto-a-ponto (C = 10 Mbps) com 3 flu
 
 | Pasta/ficheiro | Conteúdo |
 |---|---|
-| `simuladores/` | `Sim3Flows` (1.a), `Sim3FlowsPrio` (2.a), `Sim3FlowsDRR` (3.a) |
+| `simuladores/` | `Sim3Flows` (1.a), `Sim3FlowsPrio` (2.a), `Sim3FlowsDRR` (3.a); `Sim2Flows`, `Sim2FlowsPrio` (Guião Prático 2) |
 | `utils/` | `runSims` (N corridas + IC), `plotBarsCI` (barras + error bars), `params` (dados comuns) |
 | `task1b.m` … | um script por alínea |
 | `results/` | figuras `.png` (os `.mat` não vão para o Git) |

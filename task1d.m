@@ -1,4 +1,4 @@
-% TASK 1.d - Atraso médio e máximo do Fluxo 3 nos casos A, B e C
+D% TASK 1.d - Atraso médio e máximo do Fluxo 3 nos casos A, B e C
 %   f = 1.000.000 B, 50 corridas do Sim3Flows, média e IC a 90%.
 
 clear; close all;
@@ -23,6 +23,9 @@ for k = 1:nC
     fprintf('%-6s %14.4f +- %8.4f %14.4f +- %8.4f\n', p.cases{casos(k)}, ...
             APD3(k), APD3ci(k), MPD3(k), MPD3ci(k));
 end
+
+% guardado para comparar com a 2.d (prioridades)
+save(fullfile('results', 'task1d.mat'), 'APD3', 'APD3ci', 'MPD3', 'MPD3ci');
 
 plotBarsCI([APD3' MPD3'], [APD3ci' MPD3ci'], p.cases(casos), 'Delay (ms)', ...
            'Task 1.d - Packet delay of Flow 3 (FIFO)', ...

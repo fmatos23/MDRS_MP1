@@ -7,7 +7,8 @@ addpath('utils');
 p = params();
 
 lambda = p.lambda(3,:);     % caso C: [800 800 600] pps
-prio   = [2 2 1];           % classe de prioridade de cada fluxo (1 = mais alta)
+prio   = [2 2 1];           % classe de prioridade de cada fluxo (1 = mais alta),
+                            % igual ao PRIO do Sim3FlowsPrio
 a = p.minSize;  b = p.maxSize;
 
 % Tamanho de pacote uniforme discreto em [a, b] (Bytes)
