@@ -1,4 +1,4 @@
-D% TASK 1.d - Atraso médio e máximo do Fluxo 3 nos casos A, B e C
+% TASK 1.d - Atraso médio e máximo do Fluxo 3 nos casos A, B e C
 %   f = 1.000.000 B, 50 corridas do Sim3Flows, média e IC a 90%.
 
 clear; close all;
@@ -7,8 +7,8 @@ p = params();
 
 casos = 1:3;                % A, B, C
 nC    = numel(casos);
-APD3  = zeros(1,nC);  APD3ci = zeros(1,nC);
-MPD3  = zeros(1,nC);  MPD3ci = zeros(1,nC);
+APD3  = zeros(1,nC);  APD3ci = zeros(1,nC); %atraso medio  e erro do atraso medio
+MPD3  = zeros(1,nC);  MPD3ci = zeros(1,nC); %atraso maximo e erro do atrsao maximo
 
 for k = 1:nC
     lambda = p.lambda(casos(k),:);

@@ -55,32 +55,32 @@ while sum(TRANSPACKETS)<P       % Simulation stopping criterion
     switch Event
         case ARRIVAL         % If event is an ARRIVAL
             TOTALPACKETS(Flow)= TOTALPACKETS(Flow)+1;
-            tmp= Clock + exprnd(1/lambda(Flow));
-            if Flow==1
+            tmp= Clock + exprnd(1/lambda(Flow)); %calcula quando chega o proximo pacote do fluxo
+            if Flow==1 
                 nextPacketSize= GenerateSize1();
             else
                 nextPacketSize= GenerateSize2();
             end
-            EventList = [EventList; ARRIVAL, tmp, nextPacketSize, Flow, tmp];
-            if STATE==0
-                STATE= 1;
-                EventList = [EventList; DEPARTURE, Clock + 8*PacketSize/(C*1e6), PacketSize, Flow, Clock];
+            EventList = [EventList; ARRIVAL, tmp, nextPacketSize, Flow, tmp]; %agenda a proxima chegada do fluxo
+            if STATE==0 %verifica se a ligação está livre
+                STATE= 1; %se está livre passa a ocupada
+                EventList = [EventList; DEPARTURE, Clock + 8*PacketSize/(C*1e6), PacketSize, Flow, Clock]; %começa a transmitir o pacote
             else
-                if QUEUEOCCUPATION + PacketSize <= f
-                    QUEUE= [QUEUE; PacketSize , Clock, Flow];
-                    QUEUEOCCUPATION= QUEUEOCCUPATION + PacketSize;
+                if QUEUEOCCUPATION + PacketSize <= f %verifica se o pacote cabe na fila, total nao pode passar f
+                    QUEUE= [QUEUE; PacketSize , Clock, Flow]; %cabendo poe no fim da fila com os dados
+                    QUEUEOCCUPATION= QUEUEOCCUPATION + PacketSize; %ocupação aumenta
                 else
-                    LOSTPACKETS(Flow)= LOSTPACKETS(Flow) + 1;
+                    LOSTPACKETS(Flow)= LOSTPACKETS(Flow) + 1; %o pacote nao cabendo é descartado e conta como perdido
                 end
             end
         case DEPARTURE          % If event is a DEPARTURE
             TRANSBYTES(Flow)= TRANSBYTES(Flow) + PacketSize;
-            TRANSPACKETS(Flow)= TRANSPACKETS(Flow) + 1;
-            DELAYS(Flow)= DELAYS(Flow) + (Clock - ArrInstant);
+            TRANSPACKETS(Flow)= TRANSPACKETS(Flow) + 1; %conta mais um pacote transmitido
+            DELAYS(Flow)= DELAYS(Flow) + (Clock - ArrInstant); %calcula o delay (instante em que saiu menos o instante em que chegou) e soma-o ao total do fluxo
             if Clock - ArrInstant > MAXDELAY(Flow)
-                MAXDELAY(Flow)= Clock - ArrInstant;
+                MAXDELAY(Flow)= Clock - ArrInstant;  %se o atraso for o maior até agora guarda-o como novo maximo
             end
-            if QUEUEOCCUPATION > 0
+            if QUEUEOCCUPATION > 0 %ligação estando livre verifica se há pacotes na fila
                 QSize= QUEUE(1,1);
                 QInstant= QUEUE(1,2);
                 QFlow= QUEUE(1,3);

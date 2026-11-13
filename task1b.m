@@ -10,8 +10,8 @@ lambda = p.lambda(3,:);     % caso C: [800 800 600] pps
 [m, ci] = runSims(@() simRow(lambda, p), p.N, p.alfa);
 
 % cada corrida devolve [PL APD MPD TT] -> 4 linhas x 3 fluxos
-m  = reshape(m,  3, 4)';
-ci = reshape(ci, 3, 4)';
+m  = reshape(m,  3, 4)'; %media
+ci = reshape(ci, 3, 4)'; %intervalo de confiança
 
 nomes    = {'Packet loss (%)', 'Av. packet delay (ms)', ...
             'Max. packet delay (ms)', 'Throughput (Mbps)'};
